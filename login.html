@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Login | PortalSuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 460px;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+            padding: 2.5rem 2rem 2.8rem;
+            backdrop-filter: blur(2px);
+            transition: transform 0.2s ease;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e3c72, #2b4c7c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .login-header .subtitle {
+            color: #5b6f82;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+            color: #2c4b6e;
+        }
+
+        .input-group input {
+            padding: 0.9rem 1rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            background-color: #fefefe;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #2b7a62;
+            box-shadow: 0 0 0 3px rgba(43, 122, 98, 0.2);
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.8rem;
+            font-size: 0.8rem;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #4a627a;
+        }
+
+        .remember input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .forgot-link {
+            color: #2b7a62;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        button.submit-btn {
+            background: #1e4663;
+            color: white;
+            border: none;
+            padding: 0.9rem;
+            width: 100%;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 1.5rem;
+        }
+
+        button.submit-btn:hover {
+            background: #0f3550;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px -8px rgba(0, 0, 0, 0.2);
+        }
+
+        .feedback-message {
+            text-align: center;
+            font-size: 0.85rem;
+            padding: 0.7rem;
+            border-radius: 2rem;
+            background: #f0f9f4;
+            color: #2b7a62;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #9aaebf;
+            font-size: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e2edf7;
+        }
+
+        .divider::before {
+            margin-right: 1rem;
+        }
+
+        .divider::after {
+            margin-left: 1rem;
+        }
+
+        .demo-note {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #7c8ea0;
+            background: #f8fafc;
+            padding: 0.6rem;
+            border-radius: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 1.8rem;
+            }
+            .login-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <h1>Welcome back</h1>
+            <div class="subtitle">Sign in to your account</div>
+        </div>
+
+        <div class="feedback-message" id="formFeedback"></div>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label>📧 Email address</label>
+                <input type="email" id="email" name="email" placeholder="admin@company.com" required autocomplete="email">
+            </div>
+            <div class="input-group">
+                <label>🔒 Password</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
+            </div>
+            <div class="login-options">
+                <label class="remember">
+                    <input type="checkbox" id="remember"> Remember me
+                </label>
+                <a href="#" class="forgot-link">Forgot password?</a>
+            </div>
+            <button type="submit" class="submit-btn">Sign In →</button>
+        </form>
+
+        <div class="divider">secure access</div>
+        <div class="demo-note">
+            🔐 Demo credentials: any email & password (validation only)
+        </div>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('loginForm');
+    const feedbackDiv = document.getElementById('formFeedback');
+
+    function showFeedback(message, isError = false) {
+        feedbackDiv.style.display = 'block';
+        feedbackDiv.textContent = message;
+        if (isError) {
+            feedbackDiv.style.background = '#ffe8e6';
+            feedbackDiv.style.color = '#b13e3e';
+        } else {
+            feedbackDiv.style.background = '#e0f2e9';
+            feedbackDiv.style.color = '#1f6e52';
+        }
+        setTimeout(() => {
+            feedbackDiv.style.display = 'none';
+        }, 3500);
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const remember = document.getElementById('remember').checked;
+
+        if (!email || !password) {
+            showFeedback('❌ Please enter both email and password.', true);
+            return;
+        }
+
+        if (!email.includes('@') || !email.includes('.')) {
+            showFeedback('📧 Please enter a valid email address.', true);
+            return;
+        }
+
+        if (password.length < 1) {
+            showFeedback('🔒 Password cannot be empty.', true);
+            return;
+        }
+
+        if (remember) {
+            localStorage.setItem('savedEmail', email);
+        } else {
+            localStorage.removeItem('savedEmail');
+        }
+
+        showFeedback(`✅ Welcome back, ${email}! Login successful.`);
+        form.reset();
+        document.getElementById('remember').checked = false;
+    });
+
+    const savedEmail = localStorage.getItem('savedEmail');
+    if (savedEmail) {
+        document.getElementById('email').value = savedEmail;
+        document.getElementById('remember').checked = true;
+    }
+</script>
+</body>
+</html>

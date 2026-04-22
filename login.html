@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Login | PortalSuite</title>
+    <title>PortalSuite | Enterprise Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -13,157 +13,250 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f7fa;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            color: #1a1f2e;
+        }
+
+      
+        .site-header {
+            background: #ffffff;
+            border-bottom: 1px solid #e9edf2;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-container {
+            display: flex;
             align-items: center;
-            padding: 1.5rem;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .brand {
+            font-weight: 600;
+            font-size: 1.25rem;
+            letter-spacing: -0.3px;
+            color: #1e293b;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .brand:hover {
+            opacity: 0.8;
+        }
+
+        .brand-accent {
+            font-weight: 500;
+            color: #3b7c6c;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            letter-spacing: -0.2px;
+            background: transparent;
+        }
+
+        .nav-link:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .nav-link:active {
+            transform: scale(0.98);
+        }
+
+ 
+        @media (min-width: 768px) {
+            .nav-links {
+                gap: 0.5rem;
+            }
+        }
+
+         
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
         }
 
         .login-container {
             width: 100%;
-            max-width: 460px;
+            max-width: 440px;
         }
 
         .login-card {
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 2rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
-            padding: 2.5rem 2rem 2.8rem;
-            backdrop-filter: blur(2px);
-            transition: transform 0.2s ease;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
+            padding: 2rem;
+            border: 1px solid #edf2f7;
         }
 
         .login-header {
-            text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.75rem;
         }
 
         .login-header h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #1e3c72, #2b4c7c);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
+            font-size: 1.75rem;
+            font-weight: 600;
             letter-spacing: -0.5px;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
         }
 
         .login-header .subtitle {
-            color: #5b6f82;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #5b6e8c;
+            font-weight: 400;
         }
 
         .input-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             display: flex;
             flex-direction: column;
         }
 
         .input-group label {
-            font-weight: 600;
+            font-weight: 500;
+            font-size: 0.8rem;
             margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-            letter-spacing: 0.3px;
-            color: #2c4b6e;
+            color: #334155;
+            letter-spacing: -0.2px;
         }
 
         .input-group input {
-            padding: 0.9rem 1rem;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 1rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.875rem;
             transition: all 0.2s;
-            background-color: #fefefe;
+            background: #ffffff;
+            color: #0f172a;
         }
 
         .input-group input:focus {
             outline: none;
-            border-color: #2b7a62;
-            box-shadow: 0 0 0 3px rgba(43, 122, 98, 0.2);
+            border-color: #3b7c6c;
+            box-shadow: 0 0 0 3px rgba(59, 124, 108, 0.08);
+        }
+
+        .input-group input::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
         }
 
         .login-options {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.75rem;
             font-size: 0.8rem;
         }
 
         .remember {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            color: #4a627a;
+            gap: 0.5rem;
+            color: #475569;
+            font-weight: 450;
+            cursor: pointer;
         }
 
         .remember input {
             width: 16px;
             height: 16px;
+            margin: 0;
+            accent-color: #3b7c6c;
             cursor: pointer;
         }
 
         .forgot-link {
-            color: #2b7a62;
+            color: #3b7c6c;
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.8rem;
+            transition: color 0.2s;
         }
 
         .forgot-link:hover {
+            color: #2c5e52;
             text-decoration: underline;
         }
 
         button.submit-btn {
-            background: #1e4663;
+            background: #1e293b;
             color: white;
             border: none;
-            padding: 0.9rem;
+            padding: 0.8rem;
             width: 100%;
-            border-radius: 2rem;
-            font-weight: 700;
-            font-size: 1rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.875rem;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s;
             font-family: 'Inter', sans-serif;
             margin-bottom: 1.5rem;
+            letter-spacing: -0.2px;
         }
 
         button.submit-btn:hover {
-            background: #0f3550;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 18px -8px rgba(0, 0, 0, 0.2);
+            background: #0f172a;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .feedback-message {
             text-align: center;
-            font-size: 0.85rem;
-            padding: 0.7rem;
-            border-radius: 2rem;
-            background: #f0f9f4;
-            color: #2b7a62;
-            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            padding: 0.65rem;
+            border-radius: 40px;
+            margin-bottom: 1.25rem;
             display: none;
+            font-weight: 450;
         }
 
         .divider {
             display: flex;
             align-items: center;
             text-align: center;
-            color: #9aaebf;
-            font-size: 0.75rem;
-            margin: 1rem 0;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            margin: 1rem 0 0.75rem;
         }
 
         .divider::before,
         .divider::after {
             content: '';
             flex: 1;
-            border-bottom: 1px solid #e2edf7;
+            border-bottom: 1px solid #edf2f7;
         }
 
         .divider::before {
@@ -177,114 +270,300 @@
         .demo-note {
             text-align: center;
             font-size: 0.7rem;
-            color: #7c8ea0;
+            color: #6c7a91;
             background: #f8fafc;
-            padding: 0.6rem;
-            border-radius: 1rem;
+            padding: 0.5rem;
+            border-radius: 40px;
             margin-top: 0.5rem;
+            border: 1px solid #f1f5f9;
         }
 
-        @media (max-width: 480px) {
+        
+        .toast-notify {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: #1e293b;
+            color: #f1f5f9;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 450;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+            background: rgba(15, 23, 42, 0.92);
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+            opacity: 0;
+            letter-spacing: -0.2px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 860px) {
+            .navbar {
+                padding: 0 1.25rem;
+            }
+            .nav-container {
+                height: auto;
+                flex-direction: column;
+                padding: 0.75rem 0;
+                gap: 0.5rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.25rem;
+            }
+            .nav-link {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
+            }
+            .brand {
+                font-size: 1.1rem;
+            }
             .login-card {
-                padding: 1.8rem;
+                padding: 1.5rem;
             }
-            .login-header h1 {
-                font-size: 1.8rem;
+            .toast-notify {
+                white-space: normal;
+                text-align: center;
+                max-width: 85vw;
+                font-size: 0.7rem;
             }
+        }
+
+       
+        button:focus, input:focus, .nav-link:focus {
+            outline: none;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ecf3fa;
         }
     </style>
 </head>
 <body>
-<div class="login-container">
-    <div class="login-card">
-        <div class="login-header">
-            <h1>Welcome back</h1>
-            <div class="subtitle">Sign in to your account</div>
-        </div>
 
-        <div class="feedback-message" id="formFeedback"></div>
-
-        <form id="loginForm">
-            <div class="input-group">
-                <label>📧 Email address</label>
-                <input type="email" id="email" name="email" placeholder="admin@company.com" required autocomplete="email">
-            </div>
-            <div class="input-group">
-                <label>🔒 Password</label>
-                <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
-            </div>
-            <div class="login-options">
-                <label class="remember">
-                    <input type="checkbox" id="remember"> Remember me
-                </label>
-                <a href="#" class="forgot-link">Forgot password?</a>
-            </div>
-            <button type="submit" class="submit-btn">Sign In →</button>
-        </form>
-
-        <div class="divider">secure access</div>
-        <div class="demo-note">
-            🔐 Demo credentials: any email & password (validation only)
+ 
+<header class="site-header">
+    <div class="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand" id="brandHomeLink">Portal<span class="brand-accent">Suite</span></a>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link" data-form-type="user-login">User Login Form</a></li>
+                <li><a href="#" class="nav-link" data-form-type="employee-reg">Employee Registration Form</a></li>
+                <li><a href="#" class="nav-link" data-form-type="product-reg">Product Registration Form</a></li>
+                <li><a href="#" class="nav-link" data-form-type="feedback">Customer Feedback Form</a></li>
+                <li><a href="#" class="nav-link" data-form-type="event-booking">Event Booking Form</a></li>
+            </ul>
         </div>
     </div>
-</div>
+</header>
+
+<main class="main-content">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>Secure access</h1>
+                <div class="subtitle">Sign in to continue to PortalSuite</div>
+            </div>
+
+            <div class="feedback-message" id="formFeedback"></div>
+
+            <form id="loginForm" autocomplete="off">
+                <div class="input-group">
+                    <label>Email address</label>
+                    <input type="email" id="email" name="email" placeholder="hello@company.com" required autocomplete="email">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" name="password" placeholder="··········" required autocomplete="current-password">
+                </div>
+                <div class="login-options">
+                    <label class="remember">
+                        <input type="checkbox" id="remember"> <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-link" id="forgotPasswordTrigger">Forgot password?</a>
+                </div>
+                <button type="submit" class="submit-btn">Sign in →</button>
+            </form>
+
+            <div class="divider">secure enterprise access</div>
+            <div class="demo-note">
+                Demo: any valid email & password • session simulation
+            </div>
+        </div>
+    </div>
+</main>
+
+ 
+<div id="globalToast" class="toast-notify"></div>
 
 <script>
-    const form = document.getElementById('loginForm');
-    const feedbackDiv = document.getElementById('formFeedback');
+    (function() {
+        
+        const feedbackDiv = document.getElementById('formFeedback');
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const rememberCheck = document.getElementById('remember');
+        const toastEl = document.getElementById('globalToast');
+        let toastTimer = null;
 
-    function showFeedback(message, isError = false) {
-        feedbackDiv.style.display = 'block';
-        feedbackDiv.textContent = message;
-        if (isError) {
-            feedbackDiv.style.background = '#ffe8e6';
-            feedbackDiv.style.color = '#b13e3e';
-        } else {
-            feedbackDiv.style.background = '#e0f2e9';
-            feedbackDiv.style.color = '#1f6e52';
-        }
-        setTimeout(() => {
-            feedbackDiv.style.display = 'none';
-        }, 3500);
-    }
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
-        const remember = document.getElementById('remember').checked;
-
-        if (!email || !password) {
-            showFeedback('❌ Please enter both email and password.', true);
-            return;
+       
+        function showToast(message) {
+            if (toastTimer) clearTimeout(toastTimer);
+            toastEl.style.transition = 'opacity 0.2s, transform 0.2s';
+            toastEl.style.opacity = '1';
+            toastEl.style.transform = 'translateX(-50%) translateY(0)';
+            toastEl.textContent = message;
+            setTimeout(() => {
+                toastEl.style.opacity = '0';
+                toastEl.style.transform = 'translateX(-50%) translateY(10px)';
+            }, 2600);
         }
 
-        if (!email.includes('@') || !email.includes('.')) {
-            showFeedback('📧 Please enter a valid email address.', true);
-            return;
+         
+        const emptyLinks = document.querySelectorAll('.nav-link');
+        emptyLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const formType = link.getAttribute('data-form-type');
+                let displayMsg = '';
+                switch(formType) {
+                    case 'user-login':
+                        displayMsg = 'User Login Form — module not yet active (placeholder)';
+                        break;
+                    case 'employee-reg':
+                        displayMsg = 'Employee Registration Form — integration ready for demo';
+                        break;
+                    case 'product-reg':
+                        displayMsg = 'Product Registration Form — inventory management coming soon';
+                        break;
+                    case 'feedback':
+                        displayMsg = 'Customer Feedback Form — feedback analytics pipeline';
+                        break;
+                    case 'event-booking':
+                        displayMsg = 'Event Booking Form — scheduling interface placeholder';
+                        break;
+                    default:
+                        displayMsg = 'Form link — functionality under development';
+                }
+                showToast(displayMsg);
+            });
+        });
+ 
+        const brandHome = document.getElementById('brandHomeLink');
+        if (brandHome) {
+            brandHome.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('PortalSuite dashboard — coming soon');
+            });
         }
 
-        if (password.length < 1) {
-            showFeedback('🔒 Password cannot be empty.', true);
-            return;
+         
+        const forgotPwLink = document.getElementById('forgotPasswordTrigger');
+        if (forgotPwLink) {
+            forgotPwLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Password recovery flow — will be available shortly');
+            });
         }
 
-        if (remember) {
-            localStorage.setItem('savedEmail', email);
-        } else {
-            localStorage.removeItem('savedEmail');
+       
+        function setFeedback(message, isError = false) {
+            feedbackDiv.style.display = 'block';
+            feedbackDiv.textContent = message;
+            if (isError) {
+                feedbackDiv.style.backgroundColor = '#fef2f0';
+                feedbackDiv.style.color = '#b91c1c';
+                feedbackDiv.style.border = '1px solid #ffe2e0';
+            } else {
+                feedbackDiv.style.backgroundColor = '#ecfdf5';
+                feedbackDiv.style.color = '#0b5e42';
+                feedbackDiv.style.border = '1px solid #d1fae5';
+            }
+            setTimeout(() => {
+                feedbackDiv.style.display = 'none';
+            }, 3800);
         }
 
-        showFeedback(`✅ Welcome back, ${email}! Login successful.`);
-        form.reset();
-        document.getElementById('remember').checked = false;
-    });
+       
+        function loadSavedEmail() {
+            const saved = localStorage.getItem('portal_saved_email');
+            if (saved) {
+                emailInput.value = saved;
+                rememberCheck.checked = true;
+            }
+        }
 
-    const savedEmail = localStorage.getItem('savedEmail');
-    if (savedEmail) {
-        document.getElementById('email').value = savedEmail;
-        document.getElementById('remember').checked = true;
-    }
+        function saveEmailPreference(email, remember) {
+            if (remember && email) {
+                localStorage.setItem('portal_saved_email', email);
+            } else {
+                localStorage.removeItem('portal_saved_email');
+            }
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+            const remember = rememberCheck.checked;
+
+          
+            if (!email || !password) {
+                setFeedback('Please enter both email and password.', true);
+                return;
+            }
+            if (!email.includes('@') || !email.includes('.')) {
+                setFeedback('Enter a valid email address (e.g., name@domain.com).', true);
+                return;
+            }
+            if (password.length === 0) {
+                setFeedback('Password cannot be empty.', true);
+                return;
+            }
+
+            
+            saveEmailPreference(email, remember);
+            setFeedback(`Signed in successfully as ${email}. Redirect would occur.`);
+            
+             
+            passwordInput.value = '';
+            if (!remember) {
+                emailInput.value = '';
+                rememberCheck.checked = false;
+                localStorage.removeItem('portal_saved_email');
+            } else {
+               
+                emailInput.value = email;
+                rememberCheck.checked = true;
+            }
+          
+            if (!remember) {
+                emailInput.value = '';
+            }
+        });
+
+        loadSavedEmail();
+
+    
+        const allInputs = [emailInput, passwordInput];
+        allInputs.forEach(inp => {
+            inp.addEventListener('focus', () => {
+                if (feedbackDiv.style.display === 'block') {
+                    feedbackDiv.style.display = 'none';
+                }
+            });
+        });
+
+      
+        console.log('Professional navbar with 5 empty form links active');
+    })();
 </script>
 </body>
 </html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Registration Form</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --bg: #f3ede2;
+      --panel: rgba(255, 251, 245, 0.88);
+      --panel-strong: #fffdf9;
+      --text: #1e1c18;
+      --muted: #6f6658;
+      --line: rgba(87, 70, 40, 0.18);
+      --accent: #c35a2f;
+      --accent-deep: #8f3414;
+      --accent-soft: rgba(195, 90, 47, 0.12);
+      --success: #1e7a54;
+      --shadow: 0 24px 60px rgba(58, 37, 17, 0.12);
+      --radius: 24px;
+      --radius-sm: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(195, 90, 47, 0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(126, 150, 98, 0.16), transparent 24%),
+        linear-gradient(160deg, #f8f2e8 0%, #f1e6d5 45%, #eadbca 100%);
+      display: grid;
+      place-items: center;
+      padding: 32px 18px;
+    }
+
+    .shell {
+      width: min(1080px, 100%);
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: 48px;
+      background:
+        linear-gradient(180deg, rgba(30, 28, 24, 0.05), rgba(30, 28, 24, 0)),
+        linear-gradient(145deg, #faefe3, #f5e6d5);
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 32px 32px auto;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(195, 90, 47, 0.28), rgba(195, 90, 47, 0) 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(87, 70, 40, 0.1);
+      color: var(--accent-deep);
+      font-size: 0.83rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 22px 0 14px;
+      font-size: clamp(2.2rem, 4vw, 4.1rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 36ch;
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.7;
+    }
+
+    .benefits {
+      margin: 34px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .benefits li {
+      padding: 16px 18px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(87, 70, 40, 0.08);
+      color: var(--muted);
+    }
+
+    .benefits strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+      font-size: 0.98rem;
+    }
+
+    .form-panel {
+      padding: 40px 32px;
+      background: var(--panel-strong);
+    }
+
+    .panel-header h2 {
+      margin: 0;
+      font-size: 1.7rem;
+      letter-spacing: -0.03em;
+    }
+
+    .panel-header p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    form {
+      margin-top: 28px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      font-size: 0.93rem;
+      font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 15px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    textarea {
+      min-height: 118px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+      transform: translateY(-1px);
+    }
+
+    .checkbox {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-weight: 500;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .checkbox input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--accent);
+    }
+
+    button {
+      border: none;
+      border-radius: 16px;
+      padding: 16px 22px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      color: #fff;
+      font: inherit;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      box-shadow: 0 18px 30px rgba(143, 52, 20, 0.18);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 34px rgba(143, 52, 20, 0.22);
+      filter: saturate(1.04);
+    }
+
+    .status {
+      min-height: 24px;
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: var(--success);
+    }
+
+    @media (max-width: 860px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .hero,
+      .form-panel {
+        padding: 28px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      body {
+        padding: 14px;
+      }
+
+      .hero,
+      .form-panel {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <span class="eyebrow">Warranty Activation</span>
+      <h1>Register your product in a few clear steps.</h1>
+      <p>
+        Keep your purchase protected, speed up support, and make future service requests
+        easier with one quick registration.
+      </p>
+
+      <ul class="benefits">
+        <li>
+          <strong>Priority support tracking</strong>
+          Your proof of ownership stays connected to the product serial number.
+        </li>
+        <li>
+          <strong>Warranty reminders</strong>
+          Receive helpful updates about coverage and service options.
+        </li>
+        <li>
+          <strong>Faster replacement processing</strong>
+          Registration helps validate your purchase details when you need assistance.
+        </li>
+      </ul>
+    </section>
+
+    <section class="form-panel">
+      <div class="panel-header">
+        <h2>Product Registration Form</h2>
+        <p>Complete the details below to activate your registration.</p>
+      </div>
+
+      <form id="registrationForm">
+        <div class="field-grid">
+          <label for="firstName">
+            First Name
+            <input id="firstName" name="firstName" type="text" placeholder="Amina" required>
+          </label>
+
+          <label for="lastName">
+            Last Name
+            <input id="lastName" name="lastName" type="text" placeholder="Uwase" required>
+          </label>
+        </div>
+
+        <label for="email">
+          Email Address
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+        </label>
+
+        <div class="field-grid">
+          <label for="productType">
+            Product Type
+            <select id="productType" name="productType" required>
+              <option value="">Select a category</option>
+              <option>Electronics</option>
+              <option>Home Appliance</option>
+              <option>Computer Accessory</option>
+              <option>Mobile Device</option>
+              <option>Other</option>
+            </select>
+          </label>
+
+          <label for="purchaseDate">
+            Purchase Date
+            <input id="purchaseDate" name="purchaseDate" type="date" required>
+          </label>
+        </div>
+
+        <div class="field-grid">
+          <label for="modelNumber">
+            Model Number
+            <input id="modelNumber" name="modelNumber" type="text" placeholder="XR-4500">
+          </label>
+
+          <label for="serialNumber">
+            Serial Number
+            <input id="serialNumber" name="serialNumber" type="text" placeholder="SN-2026-00184" required>
+          </label>
+        </div>
+
+        <label for="retailer">
+          Retailer or Store Name
+          <input id="retailer" name="retailer" type="text" placeholder="Store name">
+        </label>
+
+        <label for="notes">
+          Additional Notes
+          <textarea id="notes" name="notes" placeholder="Include anything helpful, such as bundle details or service questions."></textarea>
+        </label>
+
+        <label class="checkbox" for="terms">
+          <input id="terms" name="terms" type="checkbox" required>
+          <span>I confirm that the product information is accurate and I agree to be contacted about this registration.</span>
+        </label>
+
+        <button type="submit">Submit Registration</button>
+        <div class="status" id="statusMessage" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("registrationForm");
+    const statusMessage = document.getElementById("statusMessage");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const data = new FormData(form);
+      const fullName = [data.get("firstName"), data.get("lastName")].filter(Boolean).join(" ");
+      const productType = data.get("productType") || "product";
+
+      statusMessage.textContent = `Thanks, ${fullName}. Your ${productType.toLowerCase()} registration has been received.`;
+      form.reset();
+    });
+  </script>
+</body>
+</html> 

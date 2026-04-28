@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PortalSuite | Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+font-family:'Inter',sans-serif;
+background:#f5f7fa;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+.site-header{
+background:#fff;
+border-bottom:1px solid #e9edf2;
+}
+
+.navbar{
+max-width:1200px;
+margin:auto;
+padding:1rem;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.brand{
+font-weight:600;
+font-size:1.2rem;
+text-decoration:none;
+color:#1e293b;
+}
+
+.nav-links{
+display:flex;
+gap:.5rem;
+list-style:none;
+}
+
+.nav-link{
+padding:.4rem .8rem;
+text-decoration:none;
+color:#475569;
+border-radius:6px;
+}
+
+.nav-link:hover{
+background:#e2e8f0;
+}
+
+.main{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.card{
+background:#fff;
+padding:2rem;
+border-radius:12px;
+width:350px;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+.card h2{
+margin-bottom:1rem;
+}
+
+.input{
+width:100%;
+padding:.7rem;
+margin-bottom:1rem;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+.btn{
+width:100%;
+padding:.7rem;
+background:#1e293b;
+color:#fff;
+border:none;
+border-radius:20px;
+cursor:pointer;
+}
+
+.btn:hover{
+background:#000;
+}
+
+.msg{
+text-align:center;
+margin-bottom:1rem;
+display:none;
+padding:.5rem;
+border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand" id="brandHomeLink">Portal<span class="brand-accent">Suite</span></a>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link" data-form-type="user-login">User Login Form</a></li>
+                <li><a href="#" class="nav-link" data-form-type="employee-reg">Employee Registration Form</a></li>
+                <li><a href="#" class="nav-link" data-form-type="product-reg">Product Registration Form</a></li>
+                <li><a href="feedback.html" class="nav-link" data-form-type="feedback">Customer Feedback Form</a></li>
+                <li><a href="#" class="nav-link" data-form-type="event-booking">Event Booking Form</a></li>
+            </ul>
+        </div>
+    </div>
+<div class="navbar">
+<a href="index.html" class="brand">PortalSuite</a>
+
+<ul class="nav-links">
+<li><a href="login.html" class="nav-link">Login</a></li>
+<li><a href="employee.html" class="nav-link">Employee</a></li>
+<li><a href="product.html" class="nav-link">Product</a></li>
+<li><a href="feedback.html" class="nav-link">Feedback</a></li>
+<li><a href="event.html" class="nav-link">Event</a></li>
+</ul>
+</div>
+</header>
+
+<div class="main">
+<div class="card">
+
+<h2>Login</h2>
+
+<div id="msg" class="msg"></div>
+
+<form id="form">
+<input type="email" id="email" class="input" placeholder="Email" required>
+<input type="password" id="password" class="input" placeholder="Password" required>
+
+<label>
+<input type="checkbox" id="remember"> Remember me
+</label>
+
+<br><br>
+
+<button class="btn">Login</button>
+</form>
+
+<br>
+<a href="forgot-password.html">Forgot password?</a>
+
+</div>
+</div>
+
+<script>
+const form = document.getElementById('form');
+const msg = document.getElementById('msg');
+
+form.addEventListener('submit', function(e){
+e.preventDefault();
+
+const email = document.getElementById('email').value;
+const password = document.getElementById('password').value;
+
+if(email === "" || password === ""){
+show("Fill all fields", true);
+return;
+}
+
+if(!email.includes("@")){
+show("Invalid email", true);
+return;
+}
+
+show("Login successful");
+
+});
+
+function show(text,error=false){
+msg.style.display="block";
+msg.innerText=text;
+
+if(error){
+msg.style.background="#fee2e2";
+msg.style.color="#991b1b";
+}else{
+msg.style.background="#dcfce7";
+msg.style.color="#166534";
+}
+
+setTimeout(()=>msg.style.display="none",3000);
+}
+</script>
+
+</body>
+</html>

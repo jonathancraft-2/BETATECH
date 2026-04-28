@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortalSuite | Customer Feedback</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #1a1f2e;
+        }
+
+        .site-header {
+            background: #ffffff;
+            border-bottom: 1px solid #e9edf2;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .brand {
+            font-weight: 600;
+            font-size: 1.25rem;
+            letter-spacing: -0.3px;
+            color: #1e293b;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .brand:hover {
+            opacity: 0.8;
+        }
+
+        .brand-accent {
+            font-weight: 500;
+            color: #3b7c6c;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #4a5568;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            letter-spacing: -0.2px;
+            background: transparent;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .feedback-container {
+            width: 100%;
+            max-width: 520px;
+        }
+
+        .feedback-card {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
+            padding: 2rem;
+            border: 1px solid #edf2f7;
+        }
+
+        .feedback-header {
+            margin-bottom: 1.75rem;
+        }
+
+        .feedback-header h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .feedback-header .subtitle {
+            font-size: 0.95rem;
+            color: #5b6e8c;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            margin-bottom: 1.25rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            color: #334155;
+            letter-spacing: -0.2px;
+        }
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            padding: 0.85rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            background: #ffffff;
+            color: #0f172a;
+        }
+
+        .input-group textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #3b7c6c;
+            box-shadow: 0 0 0 3px rgba(59, 124, 108, 0.08);
+        }
+
+        .input-group input::placeholder,
+        .input-group textarea::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .radio-group {
+            display: grid;
+            gap: 0.85rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1rem;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            background: #f8fafc;
+        }
+
+        .radio-option input {
+            accent-color: #3b7c6c;
+            cursor: pointer;
+        }
+
+        .radio-option:hover {
+            border-color: #cbd5e1;
+            background: #ffffff;
+        }
+
+        .submit-btn {
+            background: #1e293b;
+            color: white;
+            border: none;
+            padding: 0.95rem;
+            width: 100%;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            margin-top: 0.5rem;
+            letter-spacing: -0.2px;
+        }
+
+        .submit-btn:hover {
+            background: #0f172a;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .feedback-message {
+            text-align: center;
+            font-size: 0.87rem;
+            padding: 0.75rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1.25rem;
+            display: none;
+            font-weight: 500;
+        }
+
+        .help-note {
+            margin-top: 1rem;
+            color: #475569;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 0.9rem 1rem;
+            border-radius: 16px;
+        }
+
+        .toast-notify {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(15, 23, 42, 0.92);
+            color: #f1f5f9;
+            padding: 0.75rem 1.25rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 450;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+            opacity: 0;
+            letter-spacing: -0.2px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 860px) {
+            .navbar {
+                padding: 0 1.25rem;
+            }
+            .nav-container {
+                height: auto;
+                flex-direction: column;
+                padding: 0.75rem 0;
+                gap: 0.5rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.25rem;
+            }
+            .nav-link {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
+            }
+            .brand {
+                font-size: 1.1rem;
+            }
+            .feedback-card {
+                padding: 1.5rem;
+            }
+            .toast-notify {
+                white-space: normal;
+                text-align: center;
+                max-width: 85vw;
+                font-size: 0.7rem;
+            }
+        }
+
+        button:focus, input:focus, textarea:focus, select:focus, .nav-link:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="navbar">
+            <div class="nav-container">
+                <a href="login.html" class="brand">Portal<span class="brand-accent">Suite</span></a>
+                <ul class="nav-links">
+                    <li><a href="login.html" class="nav-link">User Login Form</a></li>
+                    <li><a href="#" class="nav-link">Employee Registration Form</a></li>
+                    <li><a href="#" class="nav-link">Product Registration Form</a></li>
+                    <li><a href="feedback.html" class="nav-link active">Customer Feedback Form</a></li>
+                    <li><a href="#" class="nav-link">Event Booking Form</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="feedback-container">
+            <div class="feedback-card">
+                <div class="feedback-header">
+                    <h1>Customer Feedback</h1>
+                    <div class="subtitle">We appreciate your input. Please share your experience below so we can improve PortalSuite for your team.</div>
+                </div>
+
+                <div id="formFeedback" class="feedback-message"></div>
+
+                <form id="feedbackForm" autocomplete="off" novalidate>
+                    <div class="input-group">
+                        <label for="customerName">Full name</label>
+                        <input type="text" id="customerName" name="customerName" placeholder="Jane Doe" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="customerEmail">Email address</label>
+                        <input type="email" id="customerEmail" name="customerEmail" placeholder="hello@company.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="feedbackCategory">Feedback category</label>
+                        <select id="feedbackCategory" name="feedbackCategory" required>
+                            <option value="">Select a category</option>
+                            <option value="usability">Usability</option>
+                            <option value="performance">Performance</option>
+                            <option value="features">Features</option>
+                            <option value="support">Support</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Overall satisfaction</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="rating" value="5" required> Excellent
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="rating" value="4"> Good
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="rating" value="3"> Fair
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="rating" value="2"> Poor
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="rating" value="1"> Very poor
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="comments">Tell us more</label>
+                        <textarea id="comments" name="comments" placeholder="Share your thoughts, issues, or suggestions" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit feedback</button>
+                </form>
+
+                <div class="help-note">
+                    Your feedback is reviewed by the PortalSuite team. Fields marked with * are required. We will never share your email.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="globalToast" class="toast-notify"></div>
+
+    <script>
+        const feedbackForm = document.getElementById('feedbackForm');
+        const formFeedback = document.getElementById('formFeedback');
+        const toast = document.getElementById('globalToast');
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(10px)';
+            }, 2800);
+        }
+
+        function setFeedback(message, isError = false) {
+            formFeedback.style.display = 'block';
+            formFeedback.textContent = message;
+            if (isError) {
+                formFeedback.style.backgroundColor = '#fef2f0';
+                formFeedback.style.color = '#b91c1c';
+                formFeedback.style.border = '1px solid #ffe2e0';
+            } else {
+                formFeedback.style.backgroundColor = '#ecfdf5';
+                formFeedback.style.color = '#0b5e42';
+                formFeedback.style.border = '1px solid #d1fae5';
+            }
+            window.setTimeout(() => {
+                formFeedback.style.display = 'none';
+            }, 3800);
+        }
+
+        function getSelectedRating(form) {
+            const rating = form.querySelector('input[name="rating"]:checked');
+            return rating ? rating.value : '';
+        }
+
+        function validateEmail(value) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        }
+
+        feedbackForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const name = feedbackForm.customerName.value.trim();
+            const email = feedbackForm.customerEmail.value.trim();
+            const category = feedbackForm.feedbackCategory.value;
+            const rating = getSelectedRating(feedbackForm);
+            const comments = feedbackForm.comments.value.trim();
+
+            if (!name) {
+                setFeedback('Please enter your full name.', true);
+                return;
+            }
+
+            if (!email || !validateEmail(email)) {
+                setFeedback('Please enter a valid email address.', true);
+                return;
+            }
+
+            if (!category) {
+                setFeedback('Please choose a feedback category.', true);
+                return;
+            }
+
+            if (!rating) {
+                setFeedback('Please select your overall satisfaction.', true);
+                return;
+            }
+
+            if (!comments) {
+                setFeedback('Please share your feedback in the comments.', true);
+                return;
+            }
+
+            setFeedback('Thanks for your feedback! PortalSuite will review it shortly.', false);
+            feedbackForm.reset();
+            showToast('Feedback submitted successfully');
+        });
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                if (link.getAttribute('href') === '#') {
+                    event.preventDefault();
+                    showToast('This section is coming soon.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

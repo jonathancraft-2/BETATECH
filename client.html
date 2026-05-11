@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Employee Registration</title>
+<title>Client List</title>
 
 <style>
 * {
@@ -80,7 +80,7 @@ body {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
     padding: 2.5rem;
     width: 100%;
-    max-width: 440px;
+    max-width: 800px;
     animation: fadeIn 0.4s ease;
 }
 
@@ -147,6 +147,28 @@ button:hover {
         display: none; /* simple version */
     }
 }
+
+.client-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.client-table th, .client-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.client-table th {
+    background: #f8fafc;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.client-table tr:hover {
+    background: #f1f5f9;
+}
 </style>
 </head>
 
@@ -158,39 +180,60 @@ button:hover {
 
         <ul class="nav-links">
             <li><a href="login.html" class="nav-link">Login</a></li>
-            <li><a href="#" class="nav-link active">Employee</a></li>
+            <li><a href="employee.html" class="nav-link">Employee</a></li>
+            <li><a href="#" class="nav-link active">Client</a></li>
             <li><a href="product.html" class="nav-link">Product</a></li>
             <li><a href="feedback.html" class="nav-link">Feedback</a></li>
-            <li><a href="client.html" class="nav-link">Client list</a></li>
         </ul>
     </div>
 </nav>
+
 <div class="container">
-    <form class="reg-form">
-        <h2>Employee Registration</h2>
+    <div class="reg-form">
+        <h2>Client List</h2>
 
-        <div class="input-group">
-            <label>Full Name</label>
-            <input type="text" placeholder="John Doe">
-        </div>
-
-        <div class="input-group">
-            <label>Email Address</label>
-            <input type="email" placeholder="john@company.com">
-        </div>
-
-        <div class="input-group">
-            <label>Job Title</label>
-            <input type="text" placeholder="Designer">
-        </div>
-
-        <div class="input-group">
-            <label>Phone Number</label>
-            <input type="tel" placeholder="+1 234 567 890">
-        </div>
-
-        <button type="submit">Register Employee</button>
-    </form>
+        <table class="client-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Company</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Smith</td>
+                    <td>john.smith@acme.com</td>
+                    <td>Acme Corp</td>
+                    <td>+1 234 567 8901</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td>Jane Doe</td>
+                    <td>jane.doe@techinc.com</td>
+                    <td>Tech Inc</td>
+                    <td>+1 234 567 8902</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td>Bob Johnson</td>
+                    <td>bob.johnson@startup.io</td>
+                    <td>Startup IO</td>
+                    <td>+1 234 567 8903</td>
+                    <td>Inactive</td>
+                </tr>
+                <tr>
+                    <td>Alice Brown</td>
+                    <td>alice.brown@enterprise.com</td>
+                    <td>Enterprise Ltd</td>
+                    <td>+1 234 567 8904</td>
+                    <td>Active</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 </body>

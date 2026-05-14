@@ -228,6 +228,18 @@
       }
     }
   </style>
+.msg{
+text-align:center;
+margin-bottom:1rem;
+display:none;
+padding:.5rem;
+border-radius:6px;
+}
+.bott{
+    display: flex;
+    flex-direction: column;
+}
+</style>
 </head>
 <body>
   <header class="site-header">
@@ -298,6 +310,68 @@
       msg.textContent = text;
       msg.className = error ? 'msg error' : 'msg success';
       msg.style.display = 'block';
+<form id="form">
+<input type="email" id="email" class="input" placeholder="Email" required>
+<input type="password" id="password" class="input" placeholder="Password" required>
+
+<label>
+<input type="checkbox" id="remember"> Remember me
+</label>
+
+<br><br>
+
+<button class="btn">Login</button>
+</form>
+
+<br>
+<div class="bott">
+    <a href="forgot-password.html">Forgot password?</a>
+ 
+<a href="terms.html">terms & conditions</a>
+</div>
+</div>
+</div>
+
+
+<script>
+const form = document.getElementById('form');
+const msg = document.getElementById('msg');
+
+form.addEventListener('submit', function(e){
+e.preventDefault();
+
+const email = document.getElementById('email').value;
+const password = document.getElementById('password').value;
+
+if(email === "" || password === ""){
+show("Fill all fields", true);
+return;
+}
+
+if(!email.includes("@")){
+show("Invalid email", true);
+return;
+}
+
+show("Login successful");
+
+});
+
+function show(text,error=false){
+msg.style.display="block";
+msg.innerText=text;
+
+if(error){
+msg.style.background="#fee2e2";
+msg.style.color="#991b1b";
+}else{
+msg.style.background="#dcfce7";
+msg.style.color="#166534";
+}
+
+setTimeout(()=>msg.style.display="none",3000);
+}
+</script>
 
       clearTimeout(showMessage.timeoutId);
       showMessage.timeoutId = setTimeout(() => {

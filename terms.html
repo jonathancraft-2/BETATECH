@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PortalSuite | Terms & Conditions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Inter',sans-serif;
+background:#f5f7fa;
+color:#1e293b;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+.site-header{
+background:#fff;
+border-bottom:1px solid #e9edf2;
+}
+
+.navbar{
+max-width:1200px;
+margin:auto;
+padding:1rem;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.brand{
+font-weight:600;
+font-size:1.2rem;
+text-decoration:none;
+color:#1e293b;
+}
+
+.nav-links{
+display:flex;
+gap:.5rem;
+list-style:none;
+flex-wrap:wrap;
+}
+
+.nav-link{
+padding:.4rem .8rem;
+text-decoration:none;
+color:#475569;
+border-radius:6px;
+transition:.3s;
+}
+
+.nav-link:hover{
+background:#e2e8f0;
+}
+
+.main{
+flex:1;
+display:flex;
+justify-content:center;
+padding:40px 20px;
+}
+
+.terms-card{
+background:#fff;
+max-width:900px;
+width:100%;
+padding:40px;
+border-radius:16px;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+.terms-card h1{
+margin-bottom:10px;
+font-size:2rem;
+}
+
+.terms-card p{
+line-height:1.8;
+margin-bottom:20px;
+color:#475569;
+}
+
+.section{
+margin-bottom:30px;
+}
+
+.section h2{
+margin-bottom:10px;
+font-size:1.2rem;
+color:#0f172a;
+}
+
+.footer{
+text-align:center;
+padding:20px;
+background:#fff;
+border-top:1px solid #e9edf2;
+font-size:.9rem;
+color:#64748b;
+}
+
+.accept-box{
+margin-top:30px;
+padding:20px;
+background:#f8fafc;
+border-radius:12px;
+border:1px solid #e2e8f0;
+}
+
+.accept-box label{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:15px;
+}
+
+.btn{
+padding:.8rem 1.5rem;
+border:none;
+background:#1e293b;
+color:white;
+border-radius:30px;
+cursor:pointer;
+font-weight:500;
+transition:.3s;
+}
+
+.btn:hover{
+background:#000;
+}
+
+@media(max-width:768px){
+
+.navbar{
+flex-direction:column;
+gap:15px;
+}
+
+.terms-card{
+padding:25px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+<div class="navbar">
+
+<a href="index.html" class="brand">PortalSuite</a>
+
+<ul class="nav-links">
+<li><a href="login.html" class="nav-link">Login</a></li>
+<li><a href="employee.html" class="nav-link">Employee Registration</a></li>
+<li><a href="product.html" class="nav-link">Product</a></li>
+<li><a href="feedback.html" class="nav-link">Feedback</a></li>
+<li><a href="client.html" class="nav-link">Client List</a></li>
+<li><a href="terms.html" class="nav-link">Terms</a></li>
+</ul>
+
+</div>
+</header>
+
+<div class="main">
+
+<div class="terms-card">
+
+<h1>Terms & Conditions</h1>
+
+<p>
+Welcome to PortalSuite. By accessing or using our platform,
+you agree to comply with and be bound by the following
+terms and conditions.
+</p>
+
+<div class="section">
+<h2>1. User Responsibilities</h2>
+
+<p>
+Users are responsible for maintaining the confidentiality
+of their account information and passwords. Any activity
+performed under your account is your responsibility.
+</p>
+</div>
+
+<div class="section">
+<h2>2. Privacy Policy</h2>
+
+<p>
+PortalSuite respects your privacy and protects your data.
+Your information will not be shared with third parties
+without consent unless required by law.
+</p>
+</div>
+
+<div class="section">
+<h2>3. Acceptable Use</h2>
+
+<p>
+Users must not misuse the platform, attempt unauthorized
+access, upload malicious content, or engage in activities
+that may harm the system or other users.
+</p>
+</div>
+
+<div class="section">
+<h2>4. Account Suspension</h2>
+
+<p>
+PortalSuite reserves the right to suspend or terminate
+accounts that violate these terms or engage in suspicious
+activities.
+</p>
+</div>
+
+<div class="section">
+<h2>5. Updates to Terms</h2>
+
+<p>
+We may update these terms at any time. Continued use of
+the platform after updates means you accept the revised
+terms and conditions.
+</p>
+</div>
+
+<div class="accept-box">
+
+<label>
+<input type="checkbox" id="accept">
+I agree to the Terms & Conditions
+</label>
+
+<button class="btn" onclick="acceptTerms()">
+Accept Terms
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 PortalSuite. All rights reserved.
+</div>
+
+<script>
+function acceptTerms(){
+
+const checkbox = document.getElementById("accept");
+
+if(!checkbox.checked){
+alert("Please accept the Terms & Conditions first.");
+return;
+}
+
+alert("Terms accepted successfully!");
+
+}
+</script>
+
+</body>
+</html>

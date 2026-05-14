@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PortalSuite | Event Booking</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Inter',sans-serif;
+background:#f5f7fa;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+color:#1a1f2e;
+}
+
+.site-header{
+background:#fff;
+border-bottom:1px solid #e9edf2;
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.navbar{
+max-width:1280px;
+margin:auto;
+padding:0 2rem;
+}
+
+.nav-container{
+height:70px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.brand{
+text-decoration:none;
+font-size:1.25rem;
+font-weight:600;
+color:#1e293b;
+}
+
+.brand-accent{
+color:#3b7c6c;
+font-weight:500;
+}
+
+.nav-links{
+display:flex;
+list-style:none;
+gap:.3rem;
+}
+
+.nav-link{
+text-decoration:none;
+padding:.5rem 1rem;
+font-size:.85rem;
+font-weight:500;
+color:#475569;
+border-radius:8px;
+transition:.2s;
+}
+
+.nav-link:hover,
+.nav-link.active{
+background:#f1f5f9;
+color:#0f172a;
+}
+
+.main-content{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:3rem 1.5rem;
+}
+
+.booking-container{
+width:100%;
+max-width:560px;
+}
+
+.booking-card{
+background:#fff;
+padding:2rem;
+border-radius:20px;
+border:1px solid #edf2f7;
+box-shadow:0 8px 30px rgba(0,0,0,.04),
+0 2px 4px rgba(0,0,0,.02);
+}
+
+.form-header{
+margin-bottom:1.8rem;
+}
+
+.form-header h1{
+font-size:1.8rem;
+font-weight:600;
+margin-bottom:.5rem;
+color:#0f172a;
+}
+
+.subtitle{
+color:#64748b;
+font-size:.95rem;
+line-height:1.6;
+}
+
+.input-group{
+display:flex;
+flex-direction:column;
+margin-bottom:1.2rem;
+}
+
+.input-group label{
+font-size:.82rem;
+font-weight:500;
+margin-bottom:.5rem;
+color:#334155;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+padding:.9rem 1rem;
+border:1px solid #e2e8f0;
+border-radius:12px;
+font-family:inherit;
+font-size:.95rem;
+transition:.2s;
+}
+
+.input-group textarea{
+resize:vertical;
+min-height:120px;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus{
+outline:none;
+border-color:#3b7c6c;
+box-shadow:0 0 0 3px rgba(59,124,108,.08);
+}
+
+.input-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:1rem;
+}
+
+.radio-group{
+display:grid;
+gap:.8rem;
+}
+
+.radio-option{
+display:flex;
+align-items:center;
+gap:.7rem;
+padding:.85rem 1rem;
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:14px;
+transition:.2s;
+cursor:pointer;
+}
+
+.radio-option:hover{
+background:#fff;
+border-color:#cbd5e1;
+}
+
+.radio-option input{
+accent-color:#3b7c6c;
+}
+
+.submit-btn{
+width:100%;
+padding:1rem;
+border:none;
+margin-top:.5rem;
+border-radius:40px;
+background:#1e293b;
+color:#fff;
+font-weight:600;
+font-size:.95rem;
+cursor:pointer;
+transition:.2s;
+}
+
+.submit-btn:hover{
+background:#0f172a;
+transform:translateY(-1px);
+}
+
+.help-note{
+margin-top:1rem;
+padding:1rem;
+border-radius:16px;
+background:#f8fafc;
+border:1px solid #e2e8f0;
+font-size:.85rem;
+line-height:1.7;
+color:#475569;
+}
+
+.toast{
+position:fixed;
+bottom:28px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(15,23,42,.92);
+color:#fff;
+padding:.75rem 1.3rem;
+border-radius:40px;
+font-size:.8rem;
+opacity:0;
+transition:.3s;
+}
+
+@media(max-width:860px){
+
+.nav-container{
+flex-direction:column;
+height:auto;
+padding:.8rem 0;
+}
+
+.nav-links{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.booking-card{
+padding:1.5rem;
+}
+
+.input-row{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+<body>
+
+ 
+
+<main class="main-content">
+<div class="booking-container">
+<div class="booking-card">
+
+<div class="form-header">
+<h1>Event Booking Form</h1>
+<p class="subtitle">
+Submit your event booking request below. Complete all required details for scheduling and confirmation.
+</p>
+</div>
+
+<form id="bookingForm">
+
+<div class="input-group">
+<label>Full Name</label>
+<input type="text" placeholder="Jane Doe" required>
+</div>
+
+<div class="input-row">
+<div class="input-group">
+<label>Email Address</label>
+<input type="email" placeholder="hello@company.com" required>
+</div>
+
+<div class="input-group">
+<label>Phone Number</label>
+<input type="tel" placeholder="+250..." required>
+</div>
+</div>
+
+<div class="input-group">
+<label>Event Type</label>
+<select required>
+<option value="">Select event type</option>
+<option>Conference</option>
+<option>Wedding</option>
+<option>Birthday</option>
+<option>Corporate Meeting</option>
+<option>Graduation</option>
+</select>
+</div>
+
+<div class="input-row">
+<div class="input-group">
+<label>Event Date</label>
+<input type="date" required>
+</div>
+
+<div class="input-group">
+<label>Number of Guests</label>
+<input type="number" placeholder="150" required>
+</div>
+</div>
+
+<div class="input-group">
+<label>Service Package</label>
+
+<div class="radio-group">
+
+<label class="radio-option">
+<input type="radio" name="package">
+Standard Package
+</label>
+
+<label class="radio-option">
+<input type="radio" name="package">
+Premium Package
+</label>
+
+<label class="radio-option">
+<input type="radio" name="package">
+VIP Full Service
+</label>
+
+</div>
+</div>
+
+<div class="input-group">
+<label>Special Requests</label>
+<textarea placeholder="Catering, decorations, seating preferences..."></textarea>
+</div>
+
+<button class="submit-btn" type="submit">
+Book Event
+</button>
+
+</form>
+
+<div class="help-note">
+Booking requests are reviewed by the PortalSuite Events Team. Confirmation details will be sent to your registered email.
+</div>
+
+</div>
+</div>
+</main>
+
+<div class="toast" id="toast">
+Booking request submitted successfully
+</div>
+
+<script>
+const form=document.getElementById("bookingForm");
+const toast=document.getElementById("toast");
+
+form.addEventListener("submit",function(e){
+e.preventDefault();
+
+toast.style.opacity="1";
+
+setTimeout(()=>{
+toast.style.opacity="0";
+form.reset();
+},3000);
+});
+</script>
+
+</body>
+</html>
